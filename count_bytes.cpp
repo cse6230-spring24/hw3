@@ -24,19 +24,19 @@ long count_bytes(uint8_t *data, long n, uint8_t target) {
 int main(int argc, char *argv[]) {
 	unsigned int seed = 1;
     for (int i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-s") == 0 && i + 1 < argc) {
-            seed = atoi(argv[i + 1]);
-            i++;
-        }
+      if (strcmp(argv[i], "-s") == 0 && i + 1 < argc) {
+        seed = atoi(argv[i + 1]);
+        i++;
     }
+  }
 
 	uint8_t data[N];
 	uint8_t target = 17;
 	std::mt19937_64 rng(seed);
 	std::uniform_int_distribution<uint8_t> dist(0, UINT8_MAX);
-	for (int i = 0; i < N; i++) {
-        data[i] = dist(rng);
-    }
+  for (int i = 0; i < N; i++) {
+    data[i] = dist(rng);
+  }
 	auto start_time = std::chrono::steady_clock::now();
 	long count;
 
@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 
 	auto end_time = std::chrono::steady_clock::now();
 
-  	std::chrono::duration<double> diff = end_time - start_time;
+  std::chrono::duration<double> diff = end_time - start_time;
 	double seconds = diff.count() / TRIALS;
 
 	std::cout << "Time per trial: " << seconds << " seconds, got " << count << " as the count.\n";
